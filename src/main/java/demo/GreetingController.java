@@ -23,7 +23,6 @@ public class GreetingController {
 	@RequestMapping("/greeting")
 	public String greeting(Model model, HttpServletRequest request) {
 
-		logger.info("Saying hello");
 		String id = (String)request.getSession().getId();
 		Session session = redisRepository.findOne(id);
 		
@@ -46,13 +45,6 @@ public class GreetingController {
 
 		model.addAttribute("name", name);
 		return "greeting";
-
-	}
-
-	@RequestMapping(value = "/cyclecontainer")
-	public void kill() {
-		logger.info("Forcing application exit");
-		System.exit(1);
 	}
 
 }
