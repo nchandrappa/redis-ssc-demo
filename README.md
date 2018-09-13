@@ -19,4 +19,4 @@ app.ttl=5             //seconds to expire
 mvn spring-boot:run
 ```
 
-Then you can access the UI at http://locahost:8080
+Then you can access the UI at http://localhost:8080
