@@ -3,6 +3,7 @@ package demo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,9 @@ public class GreetingController {
 	
 	@Autowired
 	SessionRepository redisRepository;
+	
+	@Autowired
+	private Environment env;
 
 	private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
@@ -41,7 +45,7 @@ public class GreetingController {
 			HttpServletResponse response, HttpServletRequest request) {
 
 		logger.info("Remembering " + name);
-		redisRepository.save(new Session((String)request.getSession().getId(), name, 30L));
+		redisRepository.save(new Session((String)request.getSession().getId(), name, Long.parseLong(env.getProperty("app.ttl"))));
 
 		model.addAttribute("name", name);
 		return "greeting";
