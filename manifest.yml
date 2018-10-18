@@ -1,0 +1,9 @@
+---
+applications:
+- name: redis-ssc-demo
+  random-route: true
+  memory: 2G
+  path: target/redis-ssc-demo-0.1.0.jar
+  buildpack: java_buildpack_offline
+  services:
+  - cerner_test
